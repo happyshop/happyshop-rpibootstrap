@@ -38,7 +38,7 @@ sudo /bin/sh -e - << EOF
   else
     cp /etc/rc.local /usr/local/etc/happyshop_rc.local_backup
   fi
-  sed -i '20i (cd /usr/local/share/happyshop-rpibootstrap && git pull && startx xterm -e happyshop-start-pos-client.sh)&\n' /etc/rc.local
+  sed -i '20i (cd /usr/local/share/happyshop-rpibootstrap && git pull && ./happyshop-start-pos-client.sh)&\n' /etc/rc.local
 
 EOF
 

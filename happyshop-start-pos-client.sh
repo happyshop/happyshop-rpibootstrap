@@ -12,7 +12,7 @@ cd /usr/local/share
   cd happyshop-${flavor}
 
     git pull
-    exec start-pos-client.sh
+    ./start-pos-client.sh
 
   cd ..
 
