@@ -11,7 +11,6 @@ cd /usr/local/share
 
   cd happyshop-${flavor}
 
-    git pull
     ./start-pos-client.sh
 
   cd ..
