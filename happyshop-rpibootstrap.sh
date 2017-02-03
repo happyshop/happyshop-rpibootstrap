@@ -15,9 +15,9 @@ fi
 
 sudo /bin/sh -e - << EOF
 
-#  apt update
-#  apt upgrade -y
-#  apt install -y mono-runtime unzip git curl xinit xserver-xorg ttf-anonymous-pro
+  apt update
+  apt upgrade -y
+  apt install -y mono-runtime unzip git curl xinit xserver-xorg ttf-anonymous-pro unclutter
 
   echo -n ${flavor} > /usr/local/etc/happyshop_flavor
   echo "Selected flavor is $(cat /usr/local/etc/happyshop_flavor)"
