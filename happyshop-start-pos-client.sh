@@ -11,6 +11,7 @@ cd /usr/local/share
 
   cd happyshop-${flavor}
 
+    chmod +x start-pos-client.sh
     ./start-pos-client.sh
 
   cd ..
