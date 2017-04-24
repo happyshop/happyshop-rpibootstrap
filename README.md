@@ -2,6 +2,10 @@
 Happyshop bootstrapper for Raspberry Pi
 Raspbery Pi 1 may not work.
 
+## Step 1: Install Raspbian with Watterott Display support.
+
+Direct download link: http://www.watterott.net/fbtft/2017-03-02-raspbian-lite-fbtft-rpi-display.zip
+
 ## Install happyshop using this bootstrapper script
 
 SSH hint: New versions of Raspbian have SSH disabled by default. If you want SSH remote access, then you need to create a file called 'SSH' in boot partition.
