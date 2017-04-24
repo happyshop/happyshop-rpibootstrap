@@ -4,6 +4,8 @@ Raspbery Pi 1 may not work.
 
 ## Install happyshop using this bootstrapper script
 
+SSH hint: New versions of Raspbian have SSH disabled by default. If you want SSH remote access, then you need to create a file called 'SSH' in boot partition.
+
 If you are already logged on to your Raspberry Pi, use
 
 ```bash
