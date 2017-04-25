@@ -23,7 +23,7 @@ sudo apt upgrade -y
 echo "mysql-server mysql-server/root_password password ${MYSQL_SERVER_PASSWORD}" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_SERVER_PASSWORD}" | sudo debconf-set-selections
 
-sudo apt install -y mysql-server mono-runtime unzip git curl xinit xserver-xorg ttf-anonymous-pro unclutter fonts-fantasque-sans apache2 php5 libapache2-mod-php5 php5-gd php5-mysql php-fpdf libphp-phpmailer php5-cli php5-common php5-curl php5-json php5-ldap php5-readline
+sudo apt install -y mysql-server mono-complete unzip git curl xinit xserver-xorg ttf-anonymous-pro unclutter fonts-fantasque-sans apache2 php5 libapache2-mod-php5 php5-gd php5-mysql php-fpdf libphp-phpmailer php5-cli php5-common php5-curl php5-json php5-ldap php5-readline
 
 sudo sh -c "echo -n ${flavor} > /usr/local/etc/happyshop_flavor"
 echo "Selected flavor is $(cat /usr/local/etc/happyshop_flavor)"
