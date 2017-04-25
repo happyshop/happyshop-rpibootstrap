@@ -15,53 +15,47 @@ then
   exit 1
 fi
 
-function install ()
-{
+MYSQL_SERVER_PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 
-  MYSQL_SERVER_PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
+sudo apt update
+sudo apt upgrade -y
 
-  apt update
-  apt upgrade -y
+echo "mysql-server mysql-server/root_password password ${MYSQL_SERVER_PASSWORD}" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${MYSQL_SERVER_PASSWORD}" | sudo debconf-set-selections
 
-  echo "mysql-server mysql-server/root_password password ${MYSQL_SERVER_PASSWORD}" | debconf-set-selections
-  echo "mysql-server mysql-server/root_password_again password ${MYSQL_SERVER_PASSWORD}" | debconf-set-selections
+sudo apt install -y mysql-server mono-runtime unzip git curl xinit xserver-xorg ttf-anonymous-pro unclutter fonts-fantasque-sans apache2 php5 libapache2-mod-php5 php5-gd php5-mysql php-fpdf libphp-phpmailer php5-cli php5-common php5-curl php5-json php5-ldap php5-readline
 
-  apt install -y mysql-server mono-runtime unzip git curl xinit xserver-xorg ttf-anonymous-pro unclutter fonts-fantasque-sans apache2 php5 libapache2-mod-php5 php5-gd php5-mysql php-fpdf libphp-phpmailer php5-cli php5-common php5-curl php5-json php5-ldap php5-readline
-
-  echo -n ${flavor} > /usr/local/etc/happyshop_flavor
-  echo "Selected flavor is $(cat /usr/local/etc/happyshop_flavor)"
+sudo sh -c "echo -n ${flavor} > /usr/local/etc/happyshop_flavor"
+echo "Selected flavor is $(cat /usr/local/etc/happyshop_flavor)"
   
-  echo -n "${MYSQL_SERVER_PASSWORD}" > /usr/local/etc/mysql_root_password
+sudo sh -c "echo -n \"${MYSQL_SERVER_PASSWORD}\" > /usr/local/etc/mysql_root_password"
 
-  cd /usr/local/share
-    if ! [ -d happyshop-rpibootstrap ]
-    then
-      git clone https://github.com/happyshop/happyshop-rpibootstrap.git
-    fi
-    cd happyshop-rpibootstrap
-      git pull
-    cd ..
-  cd ..
+pushd /usr/local/share
+if ! [ -d happyshop-rpibootstrap ]
+then
+  sudo git clone https://github.com/happyshop/happyshop-rpibootstrap.git
+fi
 
-  if [ -f /usr/local/etc/happyshop_rc.local_backup ]
-  then
-    cp /usr/local/etc/happyshop_rc.local_backup /etc/rc.local
-  else
-    cp /etc/rc.local /usr/local/etc/happyshop_rc.local_backup
-  fi
-  sed -i '20i (cd /usr/local/share/happyshop-rpibootstrap && git pull && ./happyshop-start-pos-client.sh)&\n' /etc/rc.local
+pushd happyshop-rpibootstrap
+sudo git pull
+popd
+popd
 
-  echo "###"
-  echo "### The MySQL server password is ${MYSQL_SERVER_PASSWORD}"
-  echo "###"
-  echo "### Please write down this password before closing or clearing this terminal session."
-  echo "###"
+if [ -f /usr/local/etc/happyshop_rc.local_backup ]
+then
+  sudo cp /usr/local/etc/happyshop_rc.local_backup /etc/rc.local
+else
+  sudo cp /etc/rc.local /usr/local/etc/happyshop_rc.local_backup
+fi
+sudo sed -i '20i (cd /usr/local/share/happyshop-rpibootstrap && git pull && ./happyshop-start-pos-client.sh)&\n' /etc/rc.local
 
-}
+echo "###"
+echo "### The MySQL server password is ${MYSQL_SERVER_PASSWORD}"
+echo "###"
+echo "### Please write down this password before closing or clearing this terminal session."
+echo "###"
 
-export install
-sudo bash install
 sync
-# sudo reboot
+sudo reboot
 
 exit 0
