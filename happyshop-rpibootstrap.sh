@@ -7,6 +7,8 @@ then
   exit 2
 fi
 
+echo "Parameter flavor is ${flavor}"
+
 if ! [ "$(whoami)" == "pi" ]
 then
   echo "You are not running this script from a Raspberry Pi (user should be pi but is $(whoami))."
