@@ -59,7 +59,8 @@ function install ()
 
 }
 
-sudo install
+export install
+sudo bash install
 sync
 # sudo reboot
 
