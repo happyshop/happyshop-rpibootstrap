@@ -6,7 +6,22 @@ Raspbery Pi 1 may not work.
 
 Direct download link: http://www.watterott.net/fbtft/2017-03-02-raspbian-lite-fbtft-rpi-display.zip
 
-## Install happyshop using this bootstrapper script
+## Step 2: Expand root file system via raspi-config
+
+```bash
+sudo raspi-config
+```
+
+or
+
+```bash
+curl -sSl https://raw.githubusercontent.com/happyshop/happyshop-rpibootstrap/master/happyshop-raspi-config.sh | bash -s
+```
+
+Feel free to also change the hostname, user password, and so on.
+Afterwards, do a reboot.
+
+## Step 3: Install happyshop using this bootstrapper script
 
 SSH hint: New versions of Raspbian have SSH disabled by default. If you want SSH remote access, then you need to create a file called 'SSH' in boot partition.
 
