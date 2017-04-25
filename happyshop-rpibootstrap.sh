@@ -15,7 +15,8 @@ then
   exit 1
 fi
 
-sudo /bin/sh -e - << EOF
+function install ()
+{
 
   MYSQL_SERVER_PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 
@@ -56,8 +57,9 @@ sudo /bin/sh -e - << EOF
   echo "### Please write down this password before closing or clearing this terminal session."
   echo "###"
 
-EOF
+}
 
+sudo install
 sync
 # sudo reboot
 
